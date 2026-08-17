@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>متجري</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .product {
+      background: white;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #ddd;
+    }
+
+    .product h2 {
+      margin-top: 0;
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .plus, .minus {
+      background: #ddd;
+    }
+
+    #order {
+      width: 100%;
+      background: #25D366;
+      color: white;
+      font-size: 20px;
+      margin-top: 20px;
+      padding: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🛍️ متجري</h1>
+
+  <div class="product">
+    <h2>منتج 1</h2>
+    <p>السعر: 10$</p>
+
+    <div class="quantity">
+      <button class="minus" onclick="changeQuantity(0, -1)">−</button>
+      <span id="qty0">0</span>
+      <button class="plus" onclick="changeQuantity(0, 1)">+</button>
+    </div>
+  </div>
+
+  <div class="product">
+    <h2>منتج 2</h2>
+    <p>السعر: 15$</p>
+
+    <div class="quantity">
+      <button class="minus" onclick="changeQuantity(1, -1)">−</button>
+      <span id="qty1">0</span>
+      <button class="plus" onclick="changeQuantity(1, 1)">+</button>
+    </div>
+  </div>
+
+  <button id="order" onclick="sendOrder()">
+    📱 إرسال الطلب عبر واتساب
+  </button>
+
+  <script>
+    const products = [
+      { name: "منتج 1", price: 10, quantity: 0 },
+      { name: "منتج 2", price: 15, quantity: 0 }
+    ];
+
+    function changeQuantity(index, amount) {
+      products[index].quantity += amount;
+
+      if (products[index].quantity < 0) {
+        products[index].quantity = 0;
+      }
+
+      document.getElementById("qty" + index).textContent =
+        products[index].quantity;
+    }
+
+    function sendOrder() {
+      let message = "🛍️ طلب جديد:%0A%0A";
+      let hasOrder = false;
+
+      products.forEach(product => {
+        if (product.quantity > 0) {
+          hasOrder = true;
+          message +=
+            product.name +
+            " × " +
+            product.quantity +
+            " = " +
+            (product.price * product.quantity) +
+            "$%0A";
+        }
+      });
+
+      if (!hasOrder) {
+        alert("يرجى اختيار منتج واحد على الأقل");
+        return;
+      }
+
+      const phone = "96176356614";
+
+      window.open(
+        "https://wa.me/" + phone + "?text=" + message,
+        "_blank"
+      );
+    }
+  </script>
+
+</body>
+</html>
