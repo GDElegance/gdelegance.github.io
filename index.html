@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>متجري</title>
+  <title>G&D Elegance</title>
 
   <style>
     body {
@@ -23,17 +23,30 @@
       margin: 15px 0;
       border-radius: 12px;
       box-shadow: 0 2px 8px #ddd;
+      text-align: center;
+    }
+
+    .product img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 10px;
     }
 
     .product h2 {
-      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: bold;
     }
 
     .quantity {
       display: flex;
+      justify-content: center;
       align-items: center;
       gap: 15px;
-      margin-top: 10px;
+      margin-top: 15px;
     }
 
     button {
@@ -41,7 +54,7 @@
       border-radius: 8px;
       padding: 10px 15px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 18px;
     }
 
     .plus, .minus {
@@ -61,28 +74,22 @@
 
 <body>
 
-  <h1>🛍️ متجري</h1>
+  <h1>🛍️ G&D Elegance</h1>
 
   <div class="product">
-    <h2>منتج 1</h2>
-    <p>السعر: 10$</p>
+
+    <img src="IMG-20260817-WA0086.jpg" alt="Essence Eyeliner">
+
+    <h2>Essence Eyeliner Original 100%</h2>
+
+    <p class="price">6$</p>
 
     <div class="quantity">
-      <button class="minus" onclick="changeQuantity(0, -1)">−</button>
-      <span id="qty0">0</span>
-      <button class="plus" onclick="changeQuantity(0, 1)">+</button>
+      <button class="minus" onclick="changeQuantity(-1)">−</button>
+      <span id="qty">0</span>
+      <button class="plus" onclick="changeQuantity(1)">+</button>
     </div>
-  </div>
 
-  <div class="product">
-    <h2>منتج 2</h2>
-    <p>السعر: 15$</p>
-
-    <div class="quantity">
-      <button class="minus" onclick="changeQuantity(1, -1)">−</button>
-      <span id="qty1">0</span>
-      <button class="plus" onclick="changeQuantity(1, 1)">+</button>
-    </div>
   </div>
 
   <button id="order" onclick="sendOrder()">
@@ -90,43 +97,31 @@
   </button>
 
   <script>
-    const products = [
-      { name: "منتج 1", price: 10, quantity: 0 },
-      { name: "منتج 2", price: 15, quantity: 0 }
-    ];
+    let quantity = 0;
 
-    function changeQuantity(index, amount) {
-      products[index].quantity += amount;
+    function changeQuantity(amount) {
+      quantity += amount;
 
-      if (products[index].quantity < 0) {
-        products[index].quantity = 0;
+      if (quantity < 0) {
+        quantity = 0;
       }
 
-      document.getElementById("qty" + index).textContent =
-        products[index].quantity;
+      document.getElementById("qty").textContent = quantity;
     }
 
     function sendOrder() {
-      let message = "🛍️ طلب جديد:%0A%0A";
-      let hasOrder = false;
 
-      products.forEach(product => {
-        if (product.quantity > 0) {
-          hasOrder = true;
-          message +=
-            product.name +
-            " × " +
-            product.quantity +
-            " = " +
-            (product.price * product.quantity) +
-            "$%0A";
-        }
-      });
-
-      if (!hasOrder) {
-        alert("يرجى اختيار منتج واحد على الأقل");
+      if (quantity === 0) {
+        alert("يرجى اختيار الكمية أولاً");
         return;
       }
+
+      let message =
+        "🛍️ طلب جديد:%0A%0A" +
+        "Essence Eyeliner Original 100%%0A" +
+        "الكمية: " + quantity + "%0A" +
+        "السعر: 6$%0A" +
+        "المجموع: " + (quantity * 6) + "$";
 
       const phone = "96176356614";
 
