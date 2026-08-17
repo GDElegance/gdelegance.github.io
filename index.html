@@ -23,7 +23,6 @@
       margin: 10px 0 25px;
     }
 
-    /* المجموعات */
     .categories {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -52,7 +51,6 @@
       grid-column: 1 / -1;
     }
 
-    /* المنتجات */
     .category-title {
       text-align: center;
       margin: 25px 0 15px;
@@ -154,7 +152,6 @@
       font-weight: bold;
     }
 
-    /* الطلب */
     .checkout {
       background: white;
       max-width: 700px;
@@ -224,35 +221,41 @@
 
 <h1>🛍️ G&D Elegance</h1>
 
-<!-- المجموعات -->
 <div class="categories">
 
-  <button class="category-btn all-btn active" onclick="showCategory('all', this)">
+  <button class="category-btn all-btn active"
+          onclick="showCategory('all', this)">
     🛍️ كل المنتجات
   </button>
 
-  <button class="category-btn" onclick="showCategory('makeup', this)">
+  <button class="category-btn"
+          onclick="showCategory('makeup', this)">
     💄 المكياج
   </button>
 
-  <button class="category-btn" onclick="showCategory('hair', this)">
+  <button class="category-btn"
+          onclick="showCategory('hair', this)">
     💇‍♀️ العناية بالشعر
   </button>
 
-  <button class="category-btn" onclick="showCategory('bags', this)">
+  <button class="category-btn"
+          onclick="showCategory('bags', this)">
     👜 الحقائب والمحافظ
   </button>
 
-  <button class="category-btn" onclick="showCategory('tools', this)">
+  <button class="category-btn"
+          onclick="showCategory('tools', this)">
     🪞 أدوات المكياج
   </button>
 
-  <button class="category-btn" onclick="showCategory('care', this)">
+  <button class="category-btn"
+          onclick="showCategory('care', this)">
     🧴 العناية بالبشرة والجسم
   </button>
 
-  <button class="category-btn" onclick="showCategory('korean', this)">
-  🇰🇷 منتجات كورية للعناية بالبشرة
+  <button class="category-btn"
+          onclick="showCategory('korean', this)">
+    🇰🇷 منتجات كورية للعناية بالبشرة
   </button>
 
 </div>
@@ -260,7 +263,6 @@
 <div id="products"></div>
 
 
-<!-- معلومات الطلب -->
 <div class="checkout">
 
   <h2>🚚 معلومات التوصيل</h2>
@@ -337,10 +339,6 @@
 
 <script>
 
-/* =====================================================
-   المنتجات
-===================================================== */
-
 const products = [
 
   /* ==================== 💄 المكياج ==================== */
@@ -364,7 +362,7 @@ const products = [
   },
 
   {
-    name: "Essence Mascara green",
+    name: "Essence Mascara",
     category: "makeup",
     price: 8,
     sale: 6,
@@ -382,7 +380,7 @@ const products = [
   },
 
   {
-    name: "Essence Mascara pink",
+    name: "Essence Mascara",
     category: "makeup",
     price: 8,
     sale: 6,
@@ -590,7 +588,7 @@ const products = [
   },
 
   {
-    name: "منعّم للشعر",
+    name: "منعم للشعر",
     category: "hair",
     price: 5,
     sale: null,
@@ -602,7 +600,7 @@ const products = [
   /* ==================== 👜 الحقائب والمحافظ ==================== */
 
   {
-    name: "Makeup Bag pink",
+    name: "Makeup Bag",
     category: "bags",
     price: 3,
     sale: null,
@@ -611,7 +609,7 @@ const products = [
   },
 
   {
-    name: "Makeup Bag black",
+    name: "Makeup Bag",
     category: "bags",
     price: 3,
     sale: null,
@@ -620,7 +618,7 @@ const products = [
   },
 
   {
-    name: "Mini Wallet red",
+    name: "Mini Wallet",
     category: "bags",
     price: 3,
     sale: null,
@@ -632,7 +630,7 @@ const products = [
   },
 
   {
-    name: "Wallet red",
+    name: "Wallet",
     category: "bags",
     price: 4,
     sale: null,
@@ -644,7 +642,7 @@ const products = [
   },
 
   {
-    name: "Mini Wallet cherry",
+    name: "Mini Wallet",
     category: "bags",
     price: 4,
     sale: null,
@@ -656,7 +654,7 @@ const products = [
   },
 
   {
-    name: "Mini Wallet pink",
+    name: "Mini Wallet",
     category: "bags",
     price: 2,
     sale: null,
@@ -695,7 +693,7 @@ const products = [
   },
 
   {
-    name: "Makeup Mirror cherry",
+    name: "Makeup Mirror",
     category: "tools",
     price: 3,
     sale: null,
@@ -704,7 +702,7 @@ const products = [
   },
 
   {
-    name: "Makeup Mirror pink",
+    name: "Makeup Mirror",
     category: "tools",
     price: 3,
     sale: null,
@@ -713,7 +711,7 @@ const products = [
   },
 
   {
-    name: "Makeup Mirror yellow",
+    name: "Makeup Mirror",
     category: "tools",
     price: 3,
     sale: null,
@@ -749,7 +747,7 @@ const products = [
   },
 
 
-  /* ==================== 🧴 العناية ==================== */
+  /* ==================== 🧴 العناية بالبشرة والجسم ==================== */
 
   {
     name: "Micellar Cleansing Water",
@@ -775,7 +773,8 @@ const products = [
     price: 3.5,
     sale: null,
     available: true,
-    description: "ترطيب وانتعاش لليدين بلمسة الألوفيرا 🌿💚 كريم Balea Aloe Vera لليدين يمنح البشرة الجافة ترطيبًا مكثفًا ويساعد على إبقائها ناعمة ومريحة طوال اليوم ✨ 🌱 نباتي",
+    description:
+      "ترطيب وانتعاش لليدين بلمسة الألوفيرا 🌿💚 كريم Balea Aloe Vera لليدين يمنح البشرة الجافة ترطيبًا مكثفًا ويساعد على إبقائها ناعمة ومريحة طوال اليوم ✨ 🌱 نباتي",
     images: ["IMG-20260817-WA0162.jpg"]
   },
 
@@ -786,67 +785,44 @@ const products = [
     sale: null,
     available: true,
     images: ["IMG-20260817-WA0166.jpg"]
+  },
+
+
+  /* ==================== 🇰🇷 المنتجات الكورية ==================== */
+
   {
-  name: "345 Cream",
-  category: "korean",
-  price: 27,
-  sale: null,
-  available: true,
-  images: ["IMG-20260817-WA0285.jpg"]
+    name: "345 Cream",
+    category: "korean",
+    price: 27,
+    sale: null,
+    available: true,
+    images: ["IMG-20260817-WA0285.jpg"]
   },
 
   {
-  name: "Arencia Original 100%",
-  category: "korean",
-  price: 24,
-  sale: null,
-  available: true,
-  images: ["IMG-20260817-WA0286.jpg"]
- },
-
- {
-  name: "345 Cream",
-  category: "korean",
-  price: 27,
-  sale: null,
-  available: true,
-  images: ["IMG-20260817-WA0285.jpg"]
-},
-
-{
-  name: "Arencia Original 100%",
-  category: "korean",
-  price: 24,
-  sale: null,
-  available: true,
-  images: ["IMG-20260817-WA0286.jpg"]
+    name: "Arencia Original 100%",
+    category: "korean",
+    price: 24,
+    sale: null,
+    available: true,
+    images: ["IMG-20260817-WA0286.jpg"]
   },
 
-{
-  name: "Anua Original 100%",
-  category: "korean",
-  price: 25,
-  sale: null,
-  available: true,
-  images: ["IMG-20260817-WA0287.jpg"]
-},
-
-{
-  name: "Anua Original 100%",
-  category: "korean",
-  price: 25,
-  sale: null,
-  available: true,
-  images: ["IMG-20260817-WA0287.jpg"]
-},
+  {
+    name: "Anua Original 100%",
+    category: "korean",
+    price: 25,
+    sale: null,
+    available: true,
+    images: ["IMG-20260817-WA0287.jpg"]
   }
 
 ];
 
 
-/*
-  إضافة الكمية لكل منتج
-*/
+/* =====================================================
+   الكمية
+===================================================== */
 
 products.forEach(product => {
   product.quantity = 0;
@@ -858,12 +834,25 @@ products.forEach(product => {
 ===================================================== */
 
 const categoryNames = {
-  makeup: "💄 المكياج",
-  hair: "💇‍♀️ العناية بالشعر",
-  bags: "👜 الحقائب والمحافظ",
-  tools: "🪞 أدوات المكياج",
-  care: "🧴 العناية بالبشرة والجسم"
-  korean: "🇰🇷 منتجات كورية للعناية بالبشرة"
+
+  makeup:
+    "💄 المكياج",
+
+  hair:
+    "💇‍♀️ العناية بالشعر",
+
+  bags:
+    "👜 الحقائب والمحافظ",
+
+  tools:
+    "🪞 أدوات المكياج",
+
+  care:
+    "🧴 العناية بالبشرة والجسم",
+
+  korean:
+    "🇰🇷 منتجات كورية للعناية بالبشرة"
+
 };
 
 
@@ -897,11 +886,13 @@ function renderProducts(category = "all") {
 
   container.innerHTML = "";
 
+
   const filteredProducts =
     category === "all"
     ? products
     : products.filter(
-        product => product.category === category
+        product =>
+          product.category === category
       );
 
 
@@ -924,6 +915,7 @@ function renderProducts(category = "all") {
 
     let imagesHTML = "";
 
+
     product.images.forEach(image => {
 
       imagesHTML += `
@@ -938,6 +930,7 @@ function renderProducts(category = "all") {
 
 
     let priceHTML = "";
+
 
     if (product.sale !== null) {
 
@@ -1048,7 +1041,7 @@ function renderProducts(category = "all") {
 
 
 /* =====================================================
-   الكمية
+   تغيير الكمية
 ===================================================== */
 
 function changeQuantity(index, amount) {
@@ -1077,8 +1070,10 @@ function changeQuantity(index, amount) {
 
 
   if (qtyElement) {
+
     qtyElement.textContent =
       product.quantity;
+
   }
 
 
@@ -1127,7 +1122,9 @@ function updateTotal() {
 
 
   if (productsTotal > 0) {
+
     total += delivery;
+
   }
 
 
@@ -1138,7 +1135,7 @@ function updateTotal() {
 
 
 /* =====================================================
-   إرسال الطلب عبر واتساب
+   إرسال الطلب
 ===================================================== */
 
 function sendOrder() {
@@ -1268,8 +1265,8 @@ function sendOrder() {
 
 
   /*
-    ضع رقم واتساب الخاص بك هنا
-    بصيغة دولية بدون +
+    رقم واتساب استقبال الطلبات
+    غيّره إذا كان لديك رقم آخر
   */
 
   const phone =
