@@ -1,8 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>G&D Elegance</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f3f5;
+      margin: 0;
+      padding: 15px;
+      color: #222;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 10px 0 25px;
+    }
+
+    .product {
+      background: white;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 15px;
+      box-shadow: 0 2px 10px #ddd;
+      text-align: center;
+    }
+
+    .photos {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      justify-content: center;
+    }
+
+    .photos img {
+      width: 250px;
+      height: 250px;
+      object-fit: contain;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+
+    .product h2 {
+      font-size: 20px;
+      margin: 12px 0 8px;
+    }
+
+    .description {
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 10px;
+    }
+
+    .old-price {
+      color: #888;
+      text-decoration: line-through;
+      margin-left: 8px;
+    }
+
+    .sale {
+      color: #e60023;
+      font-weight: bold;
+    }
+
+    .quantity {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin-top: 15px;
+    }
+
+    .quantity button {
+      width: 45px;
+      height: 42px;
+      border: none;
+      border-radius: 10px;
+      font-size: 24px;
+      cursor: pointer;
+      background: #ddd;
+    }
+
+    .quantity span {
+      font-size: 20px;
+      font-weight: bold;
+      min-width: 30px;
+    }
+
+    .checkout {
+      background: white;
+      padding: 20px;
+      margin-top: 25px;
+      border-radius: 15px;
+      box-shadow: 0 2px 10px #ddd;
+    }
+
+    .checkout h2 {
+      text-align: center;
+    }
+
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      margin-top: 8px;
+    }
+
+    textarea {
+      resize: vertical;
+      font-family: Arial, sans-serif;
+    }
+
+    .total {
+      font-size: 21px;
+      font-weight: bold;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    #order {
+      width: 100%;
+      background: #25D366;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    #order:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>🛍️ G&D Elegance</h1>
+
+<div id="products"></div>
+
 <div class="checkout">
 
   <h2>🚚 معلومات التوصيل</h2>
 
-  <label>اختر القضاء:</label>
+  <label for="area">📍 اختر القضاء:</label>
 
   <select id="area" onchange="updateTotal()">
 
@@ -42,17 +200,17 @@
 
   <br><br>
 
-  <label>📍 العنوان بالتفصيل:</label>
+  <label for="address">🏠 العنوان بالتفصيل:</label>
 
   <textarea
     id="address"
-    placeholder="اكتب المنطقة، الشارع، اسم المبنى، رقم الطابق، وأي تفاصيل تساعد على الوصول..."
     rows="4"
-    style="width:100%; padding:12px; border-radius:10px; border:1px solid #ccc; margin-top:8px; font-size:16px;"
+    placeholder="اكتب الشارع، اسم المبنى، رقم الطابق، وأي تفاصيل تساعد على الوصول..."
   ></textarea>
 
   <div class="total">
-    المجموع: <span id="total">0</span>$
+    💰 المجموع:
+    <span id="total">0.00</span>$
   </div>
 
   <button id="order" onclick="sendOrder()">
@@ -60,3 +218,710 @@
   </button>
 
 </div>
+
+
+<script>
+
+const products = [
+
+  {
+    name: "Essence Eyeliner Original 100%",
+    price: 6,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0086.jpg"
+    ]
+  },
+
+  {
+    name: "I Love Extreme",
+    price: 7,
+    sale: 5,
+    images: [
+      "IMG-20260817-WA0106.jpg"
+    ]
+  },
+
+  {
+    name: "Essence Mascara",
+    price: 8,
+    sale: 6,
+    images: [
+      "IMG-20260817-WA0107.jpg"
+    ]
+  },
+
+  {
+    name: "Mascara Waterproof",
+    price: 8,
+    sale: 6,
+    images: [
+      "IMG-20260817-WA0108.jpg"
+    ]
+  },
+
+  {
+    name: "Essence Mascara",
+    price: 8,
+    sale: 6,
+    images: [
+      "IMG-20260817-WA0109.jpg"
+    ]
+  },
+
+  {
+    name: "Essence Concealer",
+    price: 6,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0110.jpg"
+    ]
+  },
+
+  {
+    name: "FitMe Concealer Original 100%",
+    price: 12,
+    sale: 10,
+    images: [
+      "IMG-20260817-WA0114.jpg"
+    ]
+  },
+
+  {
+    name: "Catrice Concealer Original 100%",
+    price: 8,
+    sale: 7,
+    images: [
+      "IMG-20260817-WA0115.jpg"
+    ]
+  },
+
+  {
+    name: "Blush Essence",
+    price: 6,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0120.jpg"
+    ]
+  },
+
+  {
+    name: "Essence Blush",
+    price: 6,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0121.jpg"
+    ]
+  },
+
+  {
+    name: "Ebelin Lash Curler",
+    price: 5,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0122.jpg"
+    ]
+  },
+
+  {
+    name: "Lash Curler Essence",
+    price: 5,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0123.jpg"
+    ]
+  },
+
+  {
+    name: "Essence Eye Liner",
+    price: 4,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0124.jpg"
+    ]
+  },
+
+  {
+    name: "Balea",
+    price: 2.5,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0126.jpg"
+    ]
+  },
+
+  {
+    name: "Matte Contour Sheglam",
+    price: 6.5,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0127.jpg"
+    ]
+  },
+
+  {
+    name: "Sheglam Highlighter",
+    price: 6.5,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0128.jpg"
+    ]
+  },
+
+  {
+    name: "Micellar Cleansing Water",
+    price: 8,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0129.jpg"
+    ]
+  },
+
+  {
+    name: "Makeup Bag",
+    price: 3,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0130.jpg"
+    ]
+  },
+
+  {
+    name: "Makeup Bag",
+    price: 3,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0131.jpg"
+    ]
+  },
+
+  {
+    name: "Essence Lash and Brow Gel",
+    price: 5,
+    sale: 4,
+    images: [
+      "IMG-20260817-WA0132.jpg"
+    ]
+  },
+
+  {
+    name: "Catrice Lash and Brow Gel",
+    price: 5,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0133.jpg"
+    ]
+  },
+
+  {
+    name: "Lip Liner",
+    price: 3,
+    sale: null,
+    description: "1 piece = 3$",
+    images: [
+      "IMG-20260817-WA0101.jpg",
+      "IMG-20260817-WA0134.jpg",
+      "IMG-20260817-WA0135.jpg",
+      "IMG-20260817-WA0136.jpg"
+    ]
+  },
+
+  {
+    name: "Mascara Sheglam",
+    price: 6,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0140.jpg"
+    ]
+  },
+
+  {
+    name: "Eye Liner",
+    price: 5,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0141.jpg"
+    ]
+  },
+
+  {
+    name: "Mascara Sheglam",
+    price: 6,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0146.jpg"
+    ]
+  },
+
+  {
+    name: "Mini Wallet",
+    price: 3,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0148.jpg",
+      "IMG-20260817-WA0147.jpg"
+    ]
+  },
+
+  {
+    name: "Wallet",
+    price: 4,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0102.jpg",
+      "IMG-20260817-WA0149.jpg"
+    ]
+  },
+
+  {
+    name: "WATERPROOF COLOR LINER",
+    price: 4,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0150.jpg"
+    ]
+  },
+
+  {
+    name: "Mini Wallet",
+    price: 4,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0151.jpg",
+      "IMG-20260817-WA0159.jpg"
+    ]
+  },
+
+  {
+    name: "Mini Wallet",
+    price: 2,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0152.jpg"
+    ]
+  },
+
+  {
+    name: "Sheglam Liquid Blush",
+    price: 6.5,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0154.jpg"
+    ]
+  },
+
+  {
+    name: "Hair Styling Brush",
+    price: 3,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0155.jpg"
+    ]
+  },
+
+  {
+    name: "Waterproof Color Liner",
+    price: 4,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0156.jpg"
+    ]
+  },
+
+  {
+    name: "Waterproof Color Liner",
+    price: 4,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0157.jpg"
+    ]
+  },
+
+  {
+    name: "Makeup Mirror",
+    price: 3,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0158.jpg"
+    ]
+  },
+
+  {
+    name: "Makeup Mirror",
+    price: 3,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0160.jpg"
+    ]
+  },
+
+  {
+    name: "Makeup Mirror",
+    price: 3,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0161.jpg"
+    ]
+  },
+
+  {
+    name: "Balea Aloe Vera Hand Cream",
+    price: 3.5,
+    sale: null,
+    description: "ترطيب وانتعاش لليدين بلمسة الألوفيرا 🌿💚 كريم Balea Aloe Vera لليدين يمنح البشرة الجافة ترطيبًا مكثفًا ويساعد على إبقائها ناعمة ومريحة طوال اليوم ✨ 🌱 نباتي",
+    images: [
+      "IMG-20260817-WA0162.jpg"
+    ]
+  },
+
+  {
+    name: "Sheglam Liquid Lipstick",
+    price: 10,
+    sale: null,
+    description: "3 قطع = 10$",
+    images: [
+      "IMG-20260817-WA0163.jpg"
+    ]
+  },
+
+  {
+    name: "Eyelash Curler",
+    price: 2.5,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0153.jpg"
+    ]
+  },
+
+  {
+    name: "Body Lotion",
+    price: 4,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0166.jpg"
+    ]
+  },
+
+  {
+    name: "High Coverage",
+    price: 6.5,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0167.jpg"
+    ]
+  },
+
+  {
+    name: "Maange Makeup Brushes",
+    price: 6.5,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0173.jpg"
+    ]
+  },
+
+  {
+    name: "Makeup Brushes",
+    price: 4.5,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0174.jpg"
+    ]
+  },
+
+  {
+    name: "Makeup Brushes",
+    price: 3.5,
+    sale: null,
+    images: [
+      "IMG-20260817-WA0175.jpg"
+    ]
+  }
+
+];
+
+
+// إضافة الكمية لكل المنتجات
+products.forEach(product => {
+  product.quantity = 0;
+});
+
+
+// عرض المنتجات
+function renderProducts() {
+
+  const container = document.getElementById("products");
+
+  container.innerHTML = "";
+
+  products.forEach((product, index) => {
+
+    let imagesHTML = "";
+
+    product.images.forEach(image => {
+      imagesHTML += `
+        <img
+          src="${image}"
+          alt="${product.name}"
+        >
+      `;
+    });
+
+    let priceHTML = "";
+
+    if (product.sale !== null) {
+
+      priceHTML = `
+        <div class="price">
+          <span class="old-price">${product.price}$</span>
+          <span class="sale">${product.sale}$ 🔥 SALE</span>
+        </div>
+      `;
+
+    } else {
+
+      priceHTML = `
+        <div class="price">
+          ${product.price}$
+        </div>
+      `;
+
+    }
+
+    container.innerHTML += `
+
+      <div class="product">
+
+        <div class="photos">
+          ${imagesHTML}
+        </div>
+
+        <h2>${product.name}</h2>
+
+        ${
+          product.description
+          ? `<p class="description">${product.description}</p>`
+          : ""
+        }
+
+        ${priceHTML}
+
+        <div class="quantity">
+
+          <button
+            onclick="changeQuantity(${index}, -1)"
+          >
+            −
+          </button>
+
+          <span id="qty${index}">
+            0
+          </span>
+
+          <button
+            onclick="changeQuantity(${index}, 1)"
+          >
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+// تغيير الكمية
+function changeQuantity(index, amount) {
+
+  products[index].quantity += amount;
+
+  if (products[index].quantity < 0) {
+    products[index].quantity = 0;
+  }
+
+  document.getElementById("qty" + index).textContent =
+    products[index].quantity;
+
+  updateTotal();
+}
+
+
+// حساب المجموع
+function updateTotal() {
+
+  let productsTotal = 0;
+
+  products.forEach(product => {
+
+    if (product.quantity > 0) {
+
+      const price =
+        product.sale !== null
+        ? product.sale
+        : product.price;
+
+      productsTotal +=
+        price * product.quantity;
+    }
+
+  });
+
+  const delivery =
+    Number(document.getElementById("area").value);
+
+  let total = productsTotal;
+
+  if (productsTotal > 0) {
+    total += delivery;
+  }
+
+  document.getElementById("total").textContent =
+    total.toFixed(2);
+}
+
+
+// إرسال الطلب إلى واتساب
+function sendOrder() {
+
+  let message =
+    "🛍️ طلب جديد من G&D Elegance\n\n";
+
+  let hasOrder = false;
+
+  let productsTotal = 0;
+
+  products.forEach(product => {
+
+    if (product.quantity > 0) {
+
+      hasOrder = true;
+
+      const price =
+        product.sale !== null
+        ? product.sale
+        : product.price;
+
+      const subtotal =
+        price * product.quantity;
+
+      productsTotal += subtotal;
+
+      message +=
+        "• " +
+        product.name +
+        " × " +
+        product.quantity +
+        " = " +
+        subtotal.toFixed(2) +
+        "$\n";
+    }
+
+  });
+
+
+  if (!hasOrder) {
+
+    alert(
+      "يرجى اختيار منتج واحد على الأقل"
+    );
+
+    return;
+  }
+
+
+  const area =
+    document.getElementById("area");
+
+  const delivery =
+    Number(area.value);
+
+  const areaName =
+    area.options[area.selectedIndex].text;
+
+
+  const address =
+    document
+      .getElementById("address")
+      .value
+      .trim();
+
+
+  if (!address) {
+
+    alert(
+      "يرجى كتابة عنوان التوصيل بالتفصيل"
+    );
+
+    document
+      .getElementById("address")
+      .focus();
+
+    return;
+  }
+
+
+  const total =
+    productsTotal + delivery;
+
+
+  message +=
+    "\n💵 مجموع المنتجات: " +
+    productsTotal.toFixed(2) +
+    "$";
+
+
+  message +=
+    "\n🚚 الدليفري: " +
+    delivery.toFixed(2) +
+    "$";
+
+
+  message +=
+    "\n📍 القضاء: " +
+    areaName;
+
+
+  message +=
+    "\n🏠 العنوان بالتفصيل: " +
+    address;
+
+
+  message +=
+    "\n\n💰 المجموع النهائي: " +
+    total.toFixed(2) +
+    "$";
+
+
+  const phone =
+    "96176356614";
+
+
+  const whatsappURL =
+    "https://wa.me/" +
+    phone +
+    "?text=" +
+    encodeURIComponent(message);
+
+
+  window.open(
+    whatsappURL,
+    "_blank"
+  );
+
+}
+
+
+// تشغيل الموقع
+renderProducts();
+
+updateTotal();
+
+</script>
+
+</body>
+</html>
