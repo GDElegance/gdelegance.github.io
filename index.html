@@ -11,10 +11,10 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: #f7f3f5;
       margin: 0;
       padding: 15px;
+      font-family: Arial, sans-serif;
+      background: #f8f4f6;
       color: #222;
     }
 
@@ -23,11 +23,48 @@
       margin: 10px 0 25px;
     }
 
+    /* المجموعات */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      max-width: 700px;
+      margin: 0 auto 25px;
+    }
+
+    .category-btn {
+      border: none;
+      border-radius: 15px;
+      padding: 18px 10px;
+      background: white;
+      box-shadow: 0 2px 8px #ddd;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .category-btn.active {
+      background: #222;
+      color: white;
+    }
+
+    .all-btn {
+      grid-column: 1 / -1;
+    }
+
+    /* المنتجات */
+    .category-title {
+      text-align: center;
+      margin: 25px 0 15px;
+      font-size: 24px;
+    }
+
     .product {
       background: white;
       padding: 15px;
-      margin: 15px 0;
-      border-radius: 15px;
+      margin: 15px auto;
+      max-width: 700px;
+      border-radius: 16px;
       box-shadow: 0 2px 10px #ddd;
       text-align: center;
     }
@@ -45,6 +82,7 @@
       object-fit: contain;
       border-radius: 12px;
       flex-shrink: 0;
+      background: #fff;
     }
 
     .product h2 {
@@ -54,13 +92,13 @@
 
     .description {
       font-size: 14px;
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     .price {
       font-size: 20px;
       font-weight: bold;
-      margin: 10px;
+      margin: 12px;
     }
 
     .old-price {
@@ -78,20 +116,18 @@
       display: inline-block;
       background: #e8f8ed;
       color: #16833b;
-      padding: 7px 12px;
+      padding: 7px 13px;
       border-radius: 20px;
       font-weight: bold;
-      margin: 5px;
     }
 
     .unavailable {
       display: inline-block;
-      background: #ffe8e8;
-      color: #d60000;
+      background: #ffe7e7;
+      color: #d00000;
       padding: 9px 14px;
       border-radius: 20px;
       font-weight: bold;
-      margin: 8px;
     }
 
     .quantity {
@@ -107,22 +143,24 @@
       height: 42px;
       border: none;
       border-radius: 10px;
+      background: #ddd;
       font-size: 24px;
       cursor: pointer;
-      background: #ddd;
     }
 
     .quantity span {
+      min-width: 30px;
       font-size: 20px;
       font-weight: bold;
-      min-width: 30px;
     }
 
+    /* الطلب */
     .checkout {
       background: white;
+      max-width: 700px;
+      margin: 30px auto 10px;
       padding: 20px;
-      margin-top: 25px;
-      border-radius: 15px;
+      border-radius: 16px;
       box-shadow: 0 2px 10px #ddd;
     }
 
@@ -146,25 +184,38 @@
     }
 
     .total {
+      text-align: center;
       font-size: 21px;
       font-weight: bold;
       margin: 20px 0;
-      text-align: center;
     }
 
     #order {
       width: 100%;
-      background: #25D366;
-      color: white;
+      padding: 16px;
       border: none;
       border-radius: 12px;
-      padding: 16px;
-      font-size: 20px;
+      background: #25D366;
+      color: white;
+      font-size: 19px;
+      font-weight: bold;
       cursor: pointer;
     }
 
-    #order:hover {
-      opacity: 0.9;
+    @media (max-width: 500px) {
+      .categories {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .category-btn {
+        font-size: 15px;
+        padding: 15px 5px;
+      }
+
+      .photos img {
+        width: 220px;
+        height: 220px;
+      }
     }
   </style>
 </head>
@@ -173,22 +224,57 @@
 
 <h1>🛍️ G&D Elegance</h1>
 
+<!-- المجموعات -->
+<div class="categories">
+
+  <button class="category-btn all-btn active" onclick="showCategory('all', this)">
+    🛍️ كل المنتجات
+  </button>
+
+  <button class="category-btn" onclick="showCategory('makeup', this)">
+    💄 المكياج
+  </button>
+
+  <button class="category-btn" onclick="showCategory('hair', this)">
+    💇‍♀️ العناية بالشعر
+  </button>
+
+  <button class="category-btn" onclick="showCategory('bags', this)">
+    👜 الحقائب والمحافظ
+  </button>
+
+  <button class="category-btn" onclick="showCategory('tools', this)">
+    🪞 أدوات المكياج
+  </button>
+
+  <button class="category-btn" onclick="showCategory('care', this)">
+    🧴 العناية بالبشرة والجسم
+  </button>
+
+</div>
+
 <div id="products"></div>
 
+
+<!-- معلومات الطلب -->
 <div class="checkout">
 
   <h2>🚚 معلومات التوصيل</h2>
 
-  <label for="area">📍 اختر القضاء:</label>
+  <label for="area">
+    📍 اختر القضاء:
+  </label>
 
   <select id="area" onchange="updateTotal()">
 
     <optgroup label="🚚 دليفري 4$">
+
       <option value="4">زحلة</option>
       <option value="4">البقاع الغربي</option>
       <option value="4">راشيا</option>
       <option value="4">بعلبك</option>
       <option value="4">الهرمل</option>
+
       <option value="4">طرابلس</option>
       <option value="4">المنية-الضنية</option>
       <option value="4">زغرتا</option>
@@ -196,9 +282,11 @@
       <option value="4">الكورة</option>
       <option value="4">البترون</option>
       <option value="4">عكار</option>
+
     </optgroup>
 
     <optgroup label="🚚 دليفري 3$">
+
       <option value="3">بيروت</option>
       <option value="3">بعبدا</option>
       <option value="3">المتن</option>
@@ -206,6 +294,7 @@
       <option value="3">جبيل</option>
       <option value="3">عاليه</option>
       <option value="3">الشوف</option>
+
       <option value="3">صيدا</option>
       <option value="3">صور</option>
       <option value="3">جزين</option>
@@ -213,13 +302,16 @@
       <option value="3">بنت جبيل</option>
       <option value="3">مرجعيون</option>
       <option value="3">حاصبيا</option>
+
     </optgroup>
 
   </select>
 
   <br><br>
 
-  <label for="address">🏠 العنوان بالتفصيل:</label>
+  <label for="address">
+    🏠 العنوان بالتفصيل:
+  </label>
 
   <textarea
     id="address"
@@ -238,12 +330,20 @@
 
 </div>
 
+
 <script>
+
+/* =====================================================
+   المنتجات
+===================================================== */
 
 const products = [
 
+  /* ==================== 💄 المكياج ==================== */
+
   {
     name: "Essence Eyeliner Original 100%",
+    category: "makeup",
     price: 6,
     sale: null,
     available: true,
@@ -252,6 +352,7 @@ const products = [
 
   {
     name: "I Love Extreme",
+    category: "makeup",
     price: 7,
     sale: 5,
     available: true,
@@ -259,7 +360,8 @@ const products = [
   },
 
   {
-    name: "Essence Mascara green",
+    name: "Essence Mascara",
+    category: "makeup",
     price: 8,
     sale: 6,
     available: true,
@@ -268,6 +370,7 @@ const products = [
 
   {
     name: "Mascara Waterproof",
+    category: "makeup",
     price: 8,
     sale: 6,
     available: true,
@@ -275,7 +378,8 @@ const products = [
   },
 
   {
-    name: "Essence Mascara pink",
+    name: "Essence Mascara",
+    category: "makeup",
     price: 8,
     sale: 6,
     available: true,
@@ -284,6 +388,7 @@ const products = [
 
   {
     name: "Essence Concealer",
+    category: "makeup",
     price: 6,
     sale: null,
     available: true,
@@ -292,6 +397,7 @@ const products = [
 
   {
     name: "FitMe Concealer Original 100%",
+    category: "makeup",
     price: 12,
     sale: 10,
     available: true,
@@ -300,6 +406,7 @@ const products = [
 
   {
     name: "Catrice Concealer Original 100%",
+    category: "makeup",
     price: 8,
     sale: 7,
     available: true,
@@ -308,6 +415,7 @@ const products = [
 
   {
     name: "Blush Essence",
+    category: "makeup",
     price: 6,
     sale: null,
     available: true,
@@ -316,6 +424,7 @@ const products = [
 
   {
     name: "Essence Blush",
+    category: "makeup",
     price: 6,
     sale: null,
     available: true,
@@ -323,39 +432,8 @@ const products = [
   },
 
   {
-    name: "Ebelin Lash Curler",
-    price: 5,
-    sale: null,
-    available: true,
-    images: ["IMG-20260817-WA0122.jpg"]
-  },
-
-  {
-    name: "Lash Curler Essence",
-    price: 5,
-    sale: null,
-    available: true,
-    images: ["IMG-20260817-WA0123.jpg"]
-  },
-
-  {
-    name: "Essence Eye Liner",
-    price: 4,
-    sale: null,
-    available: true,
-    images: ["IMG-20260817-WA0124.jpg"]
-  },
-
-  {
-    name: "Balea",
-    price: 2.5,
-    sale: null,
-    available: true,
-    images: ["IMG-20260817-WA0126.jpg"]
-  },
-
-  {
     name: "Matte Contour Sheglam",
+    category: "makeup",
     price: 6.5,
     sale: null,
     available: true,
@@ -364,6 +442,7 @@ const products = [
 
   {
     name: "Sheglam Highlighter",
+    category: "makeup",
     price: 6.5,
     sale: null,
     available: true,
@@ -371,31 +450,8 @@ const products = [
   },
 
   {
-    name: "Micellar Cleansing Water",
-    price: 8,
-    sale: null,
-    available: true,
-    images: ["IMG-20260817-WA0129.jpg"]
-  },
-
-  {
-    name: "Makeup Bag pink",
-    price: 3,
-    sale: null,
-    available: true,
-    images: ["IMG-20260817-WA0130.jpg"]
-  },
-
-  {
-    name: "Makeup Bag black",
-    price: 3,
-    sale: null,
-    available: true,
-    images: ["IMG-20260817-WA0131.jpg"]
-  },
-
-  {
     name: "Essence Lash and Brow Gel",
+    category: "makeup",
     price: 5,
     sale: 4,
     available: true,
@@ -404,6 +460,7 @@ const products = [
 
   {
     name: "Catrice Lash and Brow Gel",
+    category: "makeup",
     price: 5,
     sale: null,
     available: true,
@@ -412,10 +469,11 @@ const products = [
 
   {
     name: "Lip Liner",
+    category: "makeup",
     price: 3,
     sale: null,
     available: true,
-    description: "1 piece = 3$",
+    description: "1 قطعة = 3$",
     images: [
       "IMG-20260817-WA0101.jpg",
       "IMG-20260817-WA0134.jpg",
@@ -426,6 +484,7 @@ const products = [
 
   {
     name: "Mascara Sheglam",
+    category: "makeup",
     price: 6,
     sale: null,
     available: true,
@@ -434,6 +493,7 @@ const products = [
 
   {
     name: "Eye Liner",
+    category: "makeup",
     price: 5,
     sale: null,
     available: true,
@@ -442,6 +502,7 @@ const products = [
 
   {
     name: "Mascara Sheglam",
+    category: "makeup",
     price: 6,
     sale: null,
     available: true,
@@ -449,7 +510,114 @@ const products = [
   },
 
   {
-    name: "Mini Wallet red",
+    name: "WATERPROOF COLOR LINER",
+    category: "makeup",
+    price: 4,
+    sale: null,
+    available: true,
+    images: ["IMG-20260817-WA0150.jpg"]
+  },
+
+  {
+    name: "Sheglam Liquid Blush",
+    category: "makeup",
+    price: 6.5,
+    sale: null,
+    available: true,
+    images: ["IMG-20260817-WA0154.jpg"]
+  },
+
+  {
+    name: "Waterproof Color Liner",
+    category: "makeup",
+    price: 4,
+    sale: null,
+    available: true,
+    images: ["IMG-20260817-WA0156.jpg"]
+  },
+
+  {
+    name: "Waterproof Color Liner",
+    category: "makeup",
+    price: 4,
+    sale: null,
+    available: true,
+    images: ["IMG-20260817-WA0157.jpg"]
+  },
+
+  {
+    name: "Sheglam Liquid Lipstick",
+    category: "makeup",
+    price: 10,
+    sale: null,
+    available: true,
+    description: "3 قطع = 10$",
+    images: ["IMG-20260817-WA0163.jpg"]
+  },
+
+  {
+    name: "High Coverage",
+    category: "makeup",
+    price: 6.5,
+    sale: null,
+    available: true,
+    images: ["IMG-20260817-WA0167.jpg"]
+  },
+
+
+  /* ==================== 💇‍♀️ الشعر ==================== */
+
+  {
+    name: "Hair Styling Brush",
+    category: "hair",
+    price: 3,
+    sale: null,
+    available: true,
+    images: ["IMG-20260817-WA0155.jpg"]
+  },
+
+  {
+    name: "عطر للشعر",
+    category: "hair",
+    price: 5,
+    sale: null,
+    available: true,
+    images: ["IMG-20260817-WA0253.jpg"]
+  },
+
+  {
+    name: "منعم للشعر",
+    category: "hair",
+    price: 5,
+    sale: null,
+    available: true,
+    images: ["IMG-20260817-WA0254.jpg"]
+  },
+
+
+  /* ==================== 👜 الحقائب والمحافظ ==================== */
+
+  {
+    name: "Makeup Bag",
+    category: "bags",
+    price: 3,
+    sale: null,
+    available: true,
+    images: ["IMG-20260817-WA0130.jpg"]
+  },
+
+  {
+    name: "Makeup Bag",
+    category: "bags",
+    price: 3,
+    sale: null,
+    available: true,
+    images: ["IMG-20260817-WA0131.jpg"]
+  },
+
+  {
+    name: "Mini Wallet",
+    category: "bags",
     price: 3,
     sale: null,
     available: true,
@@ -460,7 +628,8 @@ const products = [
   },
 
   {
-    name: "Wallet red",
+    name: "Wallet",
+    category: "bags",
     price: 4,
     sale: null,
     available: true,
@@ -471,15 +640,8 @@ const products = [
   },
 
   {
-    name: "WATERPROOF COLOR LINER",
-    price: 4,
-    sale: null,
-    available: true,
-    images: ["IMG-20260817-WA0150.jpg"]
-  },
-
-  {
-    name: "Mini Wallet cherry",
+    name: "Mini Wallet",
+    category: "bags",
     price: 4,
     sale: null,
     available: true,
@@ -490,89 +652,38 @@ const products = [
   },
 
   {
-    name: "Mini Wallet pink",
+    name: "Mini Wallet",
+    category: "bags",
     price: 2,
     sale: null,
     available: true,
     images: ["IMG-20260817-WA0152.jpg"]
   },
 
+
+  /* ==================== 🪞 أدوات المكياج ==================== */
+
   {
-    name: "Sheglam Liquid Blush",
-    price: 6.5,
+    name: "Ebelin Lash Curler",
+    category: "tools",
+    price: 5,
     sale: null,
     available: true,
-    images: ["IMG-20260817-WA0154.jpg"]
+    images: ["IMG-20260817-WA0122.jpg"]
   },
 
   {
-    name: "Hair Styling Brush",
-    price: 3,
+    name: "Lash Curler Essence",
+    category: "tools",
+    price: 5,
     sale: null,
     available: true,
-    images: ["IMG-20260817-WA0155.jpg"]
-  },
-
-  {
-    name: "Waterproof Color Liner",
-    price: 4,
-    sale: null,
-    available: true,
-    images: ["IMG-20260817-WA0156.jpg"]
-  },
-
-  {
-    name: "Waterproof Color Liner",
-    price: 4,
-    sale: null,
-    available: true,
-    images: ["IMG-20260817-WA0157.jpg"]
-  },
-
-  {
-    name: "Makeup Mirror cherry",
-    price: 3,
-    sale: null,
-    available: true,
-    images: ["IMG-20260817-WA0158.jpg"]
-  },
-
-  {
-    name: "Makeup Mirror pink",
-    price: 3,
-    sale: null,
-    available: true,
-    images: ["IMG-20260817-WA0160.jpg"]
-  },
-
-  {
-    name: "Makeup Mirror yellow",
-    price: 3,
-    sale: null,
-    available: true,
-    images: ["IMG-20260817-WA0161.jpg"]
-  },
-
-  {
-    name: "Balea Aloe Vera Hand Cream",
-    price: 3.5,
-    sale: null,
-    available: true,
-    description: "ترطيب وانتعاش لليدين بلمسة الألوفيرا 🌿💚 كريم Balea Aloe Vera لليدين يمنح البشرة الجافة ترطيبًا مكثفًا ويساعد على إبقائها ناعمة ومريحة طوال اليوم ✨ 🌱 نباتي",
-    images: ["IMG-20260817-WA0162.jpg"]
-  },
-
-  {
-    name: "Sheglam Liquid Lipstick",
-    price: 10,
-    sale: null,
-    available: true,
-    description: "3 قطع = 10$",
-    images: ["IMG-20260817-WA0163.jpg"]
+    images: ["IMG-20260817-WA0123.jpg"]
   },
 
   {
     name: "Eyelash Curler",
+    category: "tools",
     price: 2.5,
     sale: null,
     available: true,
@@ -580,23 +691,35 @@ const products = [
   },
 
   {
-    name: "Body Lotion",
-    price: 4,
+    name: "Makeup Mirror",
+    category: "tools",
+    price: 3,
     sale: null,
     available: true,
-    images: ["IMG-20260817-WA0166.jpg"]
+    images: ["IMG-20260817-WA0158.jpg"]
   },
 
   {
-    name: "High Coverage",
-    price: 6.5,
+    name: "Makeup Mirror",
+    category: "tools",
+    price: 3,
     sale: null,
     available: true,
-    images: ["IMG-20260817-WA0167.jpg"]
+    images: ["IMG-20260817-WA0160.jpg"]
+  },
+
+  {
+    name: "Makeup Mirror",
+    category: "tools",
+    price: 3,
+    sale: null,
+    available: true,
+    images: ["IMG-20260817-WA0161.jpg"]
   },
 
   {
     name: "Maange Makeup Brushes",
+    category: "tools",
     price: 6.5,
     sale: null,
     available: true,
@@ -605,6 +728,7 @@ const products = [
 
   {
     name: "Makeup Brushes",
+    category: "tools",
     price: 4.5,
     sale: null,
     available: true,
@@ -613,49 +737,145 @@ const products = [
 
   {
     name: "Makeup Brushes",
+    category: "tools",
     price: 3.5,
     sale: null,
     available: true,
     images: ["IMG-20260817-WA0175.jpg"]
   },
 
+
+  /* ==================== 🧴 العناية ==================== */
+
   {
-    name: "عطر للشعر",
-    price: 5,
+    name: "Micellar Cleansing Water",
+    category: "care",
+    price: 8,
     sale: null,
     available: true,
-    images: ["IMG-20260817-WA0253.jpg"]
+    images: ["IMG-20260817-WA0129.jpg"]
   },
 
   {
-    name: "منعّم للشعر",
-    price: 5,
+    name: "Balea",
+    category: "care",
+    price: 2.5,
     sale: null,
     available: true,
-    images: ["IMG-20260817-WA0254.jpg"]
+    images: ["IMG-20260817-WA0126.jpg"]
+  },
+
+  {
+    name: "Balea Aloe Vera Hand Cream",
+    category: "care",
+    price: 3.5,
+    sale: null,
+    available: true,
+    description: "ترطيب وانتعاش لليدين بلمسة الألوفيرا 🌿💚 كريم Balea Aloe Vera لليدين يمنح البشرة الجافة ترطيبًا مكثفًا ويساعد على إبقائها ناعمة ومريحة طوال اليوم ✨ 🌱 نباتي",
+    images: ["IMG-20260817-WA0162.jpg"]
+  },
+
+  {
+    name: "Body Lotion",
+    category: "care",
+    price: 4,
+    sale: null,
+    available: true,
+    images: ["IMG-20260817-WA0166.jpg"]
   }
 
 ];
+
+
+/*
+  إضافة الكمية لكل منتج
+*/
 
 products.forEach(product => {
   product.quantity = 0;
 });
 
 
-function renderProducts() {
+/* =====================================================
+   أسماء المجموعات
+===================================================== */
 
-  const container = document.getElementById("products");
+const categoryNames = {
+  makeup: "💄 المكياج",
+  hair: "💇‍♀️ العناية بالشعر",
+  bags: "👜 الحقائب والمحافظ",
+  tools: "🪞 أدوات المكياج",
+  care: "🧴 العناية بالبشرة والجسم"
+};
+
+
+/* =====================================================
+   عرض المنتجات
+===================================================== */
+
+function showCategory(category, button) {
+
+  document
+    .querySelectorAll(".category-btn")
+    .forEach(btn => {
+      btn.classList.remove("active");
+    });
+
+  button.classList.add("active");
+
+  renderProducts(category);
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+function renderProducts(category = "all") {
+
+  const container =
+    document.getElementById("products");
 
   container.innerHTML = "";
 
-  products.forEach((product, index) => {
+  const filteredProducts =
+    category === "all"
+    ? products
+    : products.filter(
+        product => product.category === category
+      );
+
+
+  if (category !== "all") {
+
+    container.innerHTML += `
+      <h2 class="category-title">
+        ${categoryNames[category]}
+      </h2>
+    `;
+
+  }
+
+
+  filteredProducts.forEach(product => {
+
+    const index =
+      products.indexOf(product);
+
 
     let imagesHTML = "";
 
     product.images.forEach(image => {
+
       imagesHTML += `
-        <img src="${image}" alt="${product.name}">
+        <img
+          src="${image}"
+          alt="${product.name}"
+          onerror="this.style.display='none'"
+        >
       `;
+
     });
 
 
@@ -665,6 +885,7 @@ function renderProducts() {
 
       priceHTML = `
         <div class="price">
+
           <span class="old-price">
             ${product.price}$
           </span>
@@ -672,6 +893,7 @@ function renderProducts() {
           <span class="sale">
             ${product.sale}$ 🔥 SALE
           </span>
+
         </div>
       `;
 
@@ -688,36 +910,45 @@ function renderProducts() {
 
     let availabilityHTML = "";
 
+
     if (product.available) {
 
       availabilityHTML = `
+
         <div class="available">
           🟢 متوفر
         </div>
 
         <div class="quantity">
 
-          <button onclick="changeQuantity(${index}, -1)">
+          <button
+            onclick="changeQuantity(${index}, -1)"
+          >
             −
           </button>
 
           <span id="qty${index}">
-            0
+            ${product.quantity}
           </span>
 
-          <button onclick="changeQuantity(${index}, 1)">
+          <button
+            onclick="changeQuantity(${index}, 1)"
+          >
             +
           </button>
 
         </div>
+
       `;
 
     } else {
 
       availabilityHTML = `
+
         <div class="unavailable">
           🔴 غير متوفر حاليًا — الكمية محدودة
         </div>
+
       `;
 
     }
@@ -731,13 +962,17 @@ function renderProducts() {
           ${imagesHTML}
         </div>
 
-        <h2>${product.name}</h2>
+        <h2>
+          ${product.name}
+        </h2>
 
         ${
           product.description
-          ? `<p class="description">
+          ? `
+            <p class="description">
               ${product.description}
-            </p>`
+            </p>
+          `
           : ""
         }
 
@@ -746,6 +981,7 @@ function renderProducts() {
         ${availabilityHTML}
 
       </div>
+
     `;
 
   });
@@ -753,30 +989,53 @@ function renderProducts() {
 }
 
 
+/* =====================================================
+   الكمية
+===================================================== */
+
 function changeQuantity(index, amount) {
 
-  if (!products[index].available) {
+  const product =
+    products[index];
+
+
+  if (!product.available) {
     return;
   }
 
-  products[index].quantity += amount;
 
-  if (products[index].quantity < 0) {
-    products[index].quantity = 0;
+  product.quantity += amount;
+
+
+  if (product.quantity < 0) {
+    product.quantity = 0;
   }
 
-  document.getElementById(
-    "qty" + index
-  ).textContent =
-    products[index].quantity;
+
+  const qtyElement =
+    document.getElementById(
+      "qty" + index
+    );
+
+
+  if (qtyElement) {
+    qtyElement.textContent =
+      product.quantity;
+  }
+
 
   updateTotal();
 }
 
 
+/* =====================================================
+   حساب المجموع
+===================================================== */
+
 function updateTotal() {
 
   let productsTotal = 0;
+
 
   products.forEach(product => {
 
@@ -790,8 +1049,10 @@ function updateTotal() {
         ? product.sale
         : product.price;
 
+
       productsTotal +=
         price * product.quantity;
+
     }
 
   });
@@ -803,22 +1064,30 @@ function updateTotal() {
     );
 
 
-  let total = productsTotal;
+  let total =
+    productsTotal;
+
 
   if (productsTotal > 0) {
     total += delivery;
   }
 
 
-  document.getElementById("total").textContent =
+  document.getElementById("total")
+    .textContent =
     total.toFixed(2);
 }
 
+
+/* =====================================================
+   إرسال الطلب عبر واتساب
+===================================================== */
 
 function sendOrder() {
 
   let message =
     "🛍️ طلب جديد من G&D Elegance\n\n";
+
 
   let hasOrder = false;
 
@@ -834,15 +1103,20 @@ function sendOrder() {
 
       hasOrder = true;
 
+
       const price =
         product.sale !== null
         ? product.sale
         : product.price;
 
+
       const subtotal =
         price * product.quantity;
 
-      productsTotal += subtotal;
+
+      productsTotal +=
+        subtotal;
+
 
       message +=
         "• " +
@@ -852,6 +1126,7 @@ function sendOrder() {
         " = " +
         subtotal.toFixed(2) +
         "$\n";
+
     }
 
   });
@@ -870,8 +1145,10 @@ function sendOrder() {
   const area =
     document.getElementById("area");
 
+
   const delivery =
     Number(area.value);
+
 
   const areaName =
     area.options[
@@ -909,24 +1186,33 @@ function sendOrder() {
     productsTotal.toFixed(2) +
     "$";
 
+
   message +=
     "\n🚚 الدليفري: " +
     delivery.toFixed(2) +
     "$";
 
+
   message +=
     "\n📍 القضاء: " +
     areaName;
 
+
   message +=
     "\n🏠 العنوان بالتفصيل: " +
     address;
+
 
   message +=
     "\n\n💰 المجموع النهائي: " +
     total.toFixed(2) +
     "$";
 
+
+  /*
+    ضع رقم واتساب الخاص بك هنا
+    بصيغة دولية بدون +
+  */
 
   const phone =
     "96176356614";
@@ -946,7 +1232,12 @@ function sendOrder() {
 }
 
 
-renderProducts();
+/* =====================================================
+   تشغيل الموقع
+===================================================== */
+
+renderProducts("all");
+
 updateTotal();
 
 </script>
