@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>G&D Elegance</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -152,6 +154,27 @@
       font-weight: bold;
     }
 
+    .gift-number {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 12px 0;
+    }
+
+    .ask-price {
+      display: block;
+      width: 100%;
+      max-width: 350px;
+      margin: 12px auto 5px;
+      padding: 13px;
+      border: none;
+      border-radius: 12px;
+      background: #25D366;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
     .checkout {
       background: white;
       max-width: 700px;
@@ -200,6 +223,7 @@
     }
 
     @media (max-width: 500px) {
+
       .categories {
         grid-template-columns: 1fr 1fr;
       }
@@ -213,13 +237,18 @@
         width: 220px;
         height: 220px;
       }
+
     }
+
   </style>
 </head>
 
 <body>
 
 <h1>🛍️ G&D Elegance</h1>
+
+
+<!-- ==================== المجموعات ==================== -->
 
 <div class="categories">
 
@@ -258,10 +287,28 @@
     🇰🇷 منتجات كورية للعناية بالبشرة
   </button>
 
+  <button class="category-btn"
+          onclick="showCategory('accessories', this)">
+    ⌚ الإكسسوارات
+  </button>
+
+  <button class="category-btn"
+          onclick="showCategory('ldora', this)">
+    🌿 L'DORA
+  </button>
+
+  <button class="category-btn"
+          onclick="showCategory('gifts', this)">
+    🎁 أفكار هدايا
+  </button>
+
 </div>
+
 
 <div id="products"></div>
 
+
+<!-- ==================== معلومات التوصيل ==================== -->
 
 <div class="checkout">
 
@@ -313,7 +360,9 @@
 
   </select>
 
+
   <br><br>
+
 
   <label for="address">
     🏠 العنوان بالتفصيل:
@@ -325,10 +374,17 @@
     placeholder="اكتب المنطقة، الشارع، اسم المبنى، رقم الطابق، وأي تفاصيل تساعد على الوصول..."
   ></textarea>
 
+
   <div class="total">
+
     💰 المجموع:
-    <span id="total">0.00</span>$
+
+    <span id="total">
+      0.00
+    </span>$
+
   </div>
+
 
   <button id="order" onclick="sendOrder()">
     📱 إرسال الطلب عبر واتساب
@@ -337,7 +393,13 @@
 </div>
 
 
+
 <script>
+
+
+/* =====================================================
+   المنتجات
+===================================================== */
 
 const products = [
 
@@ -564,8 +626,17 @@ const products = [
     images: ["IMG-20260817-WA0167.jpg"]
   },
 
+  {
+    name: "Lipstick Sheglam",
+    category: "makeup",
+    price: 6,
+    sale: null,
+    available: true,
+    images: ["IMG-20260901-WA0006.jpg"]
+  },
 
-  /* ==================== 💇‍♀️ الشعر ==================== */
+
+  /* ==================== 💇‍♀️ العناية بالشعر ==================== */
 
   {
     name: "Hair Styling Brush",
@@ -592,6 +663,17 @@ const products = [
     sale: null,
     available: false,
     images: ["IMG-20260817-WA0254.jpg"]
+  },
+
+  {
+    name: "SKALA Dona Skala - 1000g",
+    category: "hair",
+    price: 15,
+    sale: null,
+    available: true,
+    description:
+      "🌸 ترطيب وعناية للشعر. بيعطي نعومة ولمعة وحيوية، وبيساعد على تقليل الجفاف والهيشان. مناسب للشعر الناعم والمموج. غني بزيوت نباتية الأفوكادو، جوز الهند، دوار الشمس وبذور الكتان. حجم كبير 1000g. لشعر أنعم وأطرى ولمعته أحلى ✨",
+    images: ["IMG-20260901-WA0014.jpg"]
   },
 
 
@@ -785,6 +867,26 @@ const products = [
     images: ["IMG-20260817-WA0166.jpg"]
   },
 
+  {
+    name: "Hand Cream",
+    category: "care",
+    price: 1,
+    sale: null,
+    available: true,
+    description: "1 قطعة = 1$",
+    images: ["IMG-20260901-WA0005.jpg"]
+  },
+
+  {
+    name: "Eyelash Serum",
+    category: "care",
+    price: 7,
+    sale: null,
+    available: true,
+    description: "سيروم للعناية بالرموش",
+    images: ["IMG-20260901-WA0011.jpg"]
+  },
+
 
   /* ==================== 🇰🇷 المنتجات الكورية ==================== */
 
@@ -813,9 +915,226 @@ const products = [
     sale: null,
     available: false,
     images: ["IMG-20260817-WA0287.jpg"]
+  },
+
+  {
+    name: "Arencia Vitamin C",
+    category: "korean",
+    price: 22,
+    sale: null,
+    available: true,
+    images: ["IMG-20260901-WA0009.jpg"]
+  },
+
+  {
+    name: "Celimax Retinal",
+    category: "korean",
+    price: 22,
+    sale: null,
+    available: true,
+    images: ["IMG-20260901-WA0010.jpg"]
+  },
+
+  {
+    name: "Triple Collagen Toner",
+    category: "korean",
+    price: 18,
+    sale: null,
+    available: true,
+    images: ["IMG-20260901-WA0015.jpg"]
+  },
+
+  {
+    name: "PDRN Pink Peptide Serum",
+    category: "korean",
+    price: 20,
+    sale: null,
+    available: true,
+    images: ["IMG-20260901-WA0016.jpg"]
+  },
+
+  {
+    name: "Red Foam Cleanser",
+    category: "korean",
+    price: 16,
+    sale: null,
+    available: true,
+    images: ["IMG-20260901-WA0018.jpg"]
+  },
+
+
+  /* ==================== ⌚ الإكسسوارات ==================== */
+
+  {
+    name: "White Wristwatch",
+    category: "accessories",
+    price: 1,
+    sale: null,
+    available: true,
+    images: ["IMG-20260901-WA0001.jpg"]
+  },
+
+  {
+    name: "Pink Wristwatch",
+    category: "accessories",
+    price: 1,
+    sale: null,
+    available: true,
+    images: ["IMG-20260901-WA0002.jpg"]
+  },
+
+  {
+    name: "Beige Wristwatch",
+    category: "accessories",
+    price: 1,
+    sale: null,
+    available: true,
+    images: ["IMG-20260901-WA0003.jpg"]
+  },
+
+  {
+    name: "Clips",
+    category: "accessories",
+    price: 1,
+    sale: null,
+    available: true,
+    description: "1 قطعة = 1$",
+    images: [
+      "IMG-20260901-WA0007.jpg",
+      "IMG-20260901-WA0008.jpg"
+    ]
+  },
+
+  {
+    name: "Gazelle Heel",
+    category: "accessories",
+    price: 7,
+    sale: null,
+    available: true,
+    images: [
+      "IMG-20260901-WA0012.jpg",
+      "IMG-20260901-WA0013.jpg"
+    ]
+  },
+
+
+  /* ==================== 🌿 L'DORA ==================== */
+
+  {
+    name: "L'DORA Herbal Soap with Pine Extract & Salvia",
+    category: "ldora",
+    price: 10,
+    sale: null,
+    available: true,
+    description:
+      "🧼 تنظيف البشرة من الأوساخ والدهون الزائدة. 🌿 تساعد على تنقية البشرة. ✨ تترك البشرة نظيفة ومنتعشة. 🌲 تحتوي على مستخلص الصنوبر والميرمية. 🚿 مناسبة للتنظيف اليومي. 70g",
+    images: ["IMG-20260901-WA0021.jpg"]
+  },
+
+  {
+    name: "L'DORA Herbal Soap with Lavender Extract",
+    category: "ldora",
+    price: 10,
+    sale: null,
+    available: true,
+    description:
+      "تنظف البشرة وتزيل الأوساخ والدهون. تحتوي على مستخلص اللافندر. بتعطي إحساس بالانتعاش والراحة. بتساعد تترك البشرة ناعمة ونظيفة. مناسبة للاستخدام اليومي. 70g",
+    images: ["IMG-20260901-WA0022.jpg"]
+  },
+
+  {
+    name: "L'DORA Herbal Soap with Honey Extract & Saffron",
+    category: "ldora",
+    price: 10,
+    sale: null,
+    available: true,
+    description:
+      "🍯 بتساعد على ترطيب وتنعيم البشرة. 🧼 تنظف البشرة من الأوساخ والدهون. ✨ بتترك البشرة ناعمة ونضرة. 🌸 تحتوي على مستخلص العسل والزعفران. 💛 مناسبة للعناية والتنظيف اليومي. 70g",
+    images: ["IMG-20260901-WA0023.jpg"]
+  },
+
+  {
+    name: "L'DORA Care Facial Gel Cleanser",
+    category: "ldora",
+    price: 10,
+    sale: null,
+    available: true,
+    description:
+      "🧼 بينظّف البشرة من الأوساخ والدهون. ✨ بيساعد على تنظيف المسام وإزالة التراكمات. 🫧 الفرشاية بتعطي تقشير خفيف وتساعد تشيل الخلايا الميتة. 💧 بيساعد يخلي البشرة أنعم وأنضف بعد الغسيل. 🌿 مناسب كخطوة أولى قبل السيروم والمرطّب.",
+    images: [
+      "IMG-20260901-WA0032.jpg",
+      "IMG-20260901-WA0030.jpg",
+      "IMG-20260901-WA0031.jpg"
+    ]
+  },
+
+  {
+    name: "L'DORA Fragrance Shine Body Splash",
+    category: "ldora",
+    price: 8,
+    sale: null,
+    available: true,
+    description: "✨ Shine Body Splash, 120 ml",
+    images: [
+      "IMG-20260901-WA0033.jpg",
+      "IMG-20260901-WA0034.jpg"
+    ]
+  },
+
+  {
+    name: "L'DORA Fragrance Emotional Deodorant Roll-On",
+    category: "ldora",
+    price: 7,
+    sale: null,
+    available: true,
+    description: "L'DORA Fragrance Emotional Deodorant Roll-On for Women, 50 ml",
+    images: [
+      "IMG-20260901-WA0035.jpg",
+      "IMG-20260901-WA0036.jpg"
+    ]
+  },
+
+  {
+    name: "Eyebrow Growth Enhancer Tonic Oil",
+    category: "ldora",
+    price: 7,
+    sale: null,
+    available: true,
+    description: "🌿 Eyebrow Growth Enhancer Tonic Oil, 40 ml",
+    images: [
+      "IMG-20260901-WA0037.jpg",
+      "IMG-20260901-WA0038.jpg"
+    ]
   }
 
 ];
+
+
+
+/* =====================================================
+   أفكار الهدايا
+===================================================== */
+
+const giftIdeas = [
+
+  "IMG-20260901-WA0039.jpg",
+  "IMG-20260901-WA0040.jpg",
+  "IMG-20260901-WA0041.jpg",
+  "IMG-20260901-WA0042.jpg",
+  "IMG-20260901-WA0043.jpg",
+  "IMG-20260901-WA0044.jpg",
+  "IMG-20260901-WA0045.jpg",
+  "IMG-20260901-WA0046.jpg",
+  "IMG-20260901-WA0047.jpg",
+  "IMG-20260901-WA0048.jpg",
+  "IMG-20260901-WA0049.jpg",
+  "IMG-20260901-WA0050.jpg",
+  "IMG-20260901-WA0051.jpg",
+  "IMG-20260901-WA0052.jpg",
+  "IMG-20260901-WA0053.jpg"
+
+];
+
 
 
 /* =====================================================
@@ -823,8 +1142,11 @@ const products = [
 ===================================================== */
 
 products.forEach(product => {
+
   product.quantity = 0;
+
 });
+
 
 
 /* =====================================================
@@ -849,13 +1171,23 @@ const categoryNames = {
     "🧴 العناية بالبشرة والجسم",
 
   korean:
-    "🇰🇷 منتجات كورية للعناية بالبشرة"
+    "🇰🇷 منتجات كورية للعناية بالبشرة",
+
+  accessories:
+    "⌚ الإكسسوارات",
+
+  ldora:
+    "🌿 L'DORA",
+
+  gifts:
+    "🎁 أفكار هدايا"
 
 };
 
 
+
 /* =====================================================
-   عرض المنتجات
+   عرض المجموعة
 ===================================================== */
 
 function showCategory(category, button) {
@@ -863,46 +1195,131 @@ function showCategory(category, button) {
   document
     .querySelectorAll(".category-btn")
     .forEach(btn => {
+
       btn.classList.remove("active");
+
     });
+
 
   button.classList.add("active");
 
+
   renderProducts(category);
 
+
   window.scrollTo({
+
     top: 0,
+
     behavior: "smooth"
+
   });
+
 }
 
+
+
+/* =====================================================
+   عرض المنتجات
+===================================================== */
 
 function renderProducts(category = "all") {
 
   const container =
     document.getElementById("products");
 
+
   container.innerHTML = "";
 
 
+  /* ==================== 🎁 أفكار الهدايا ==================== */
+
+  if (category === "gifts") {
+
+    container.innerHTML = `
+
+      <h2 class="category-title">
+        🎁 أفكار هدايا
+      </h2>
+
+    `;
+
+
+    giftIdeas.forEach((image, index) => {
+
+      const number =
+        index + 1;
+
+
+      container.innerHTML += `
+
+        <div class="product">
+
+          <div class="photos">
+
+            <img
+              src="${image}"
+              alt="Gift Idea ${number}"
+              onerror="this.style.display='none'"
+            >
+
+          </div>
+
+          <div class="gift-number">
+            🎁 فكرة هدية رقم ${number}
+          </div>
+
+          <button
+            class="ask-price"
+            onclick="askGiftPrice(${number})"
+          >
+            💬 السؤال عن السعر
+          </button>
+
+        </div>
+
+      `;
+
+    });
+
+
+    return;
+
+  }
+
+
+
+  /* ==================== المنتجات العادية ==================== */
+
   const filteredProducts =
+
     category === "all"
-    ? products
-    : products.filter(
-        product =>
-          product.category === category
-      );
+
+      ? products
+
+      : products.filter(
+
+          product =>
+            product.category === category
+
+        );
+
 
 
   if (category !== "all") {
 
     container.innerHTML += `
+
       <h2 class="category-title">
+
         ${categoryNames[category]}
+
       </h2>
+
     `;
 
   }
+
 
 
   filteredProducts.forEach(product => {
@@ -911,20 +1328,24 @@ function renderProducts(category = "all") {
       products.indexOf(product);
 
 
+
     let imagesHTML = "";
 
 
     product.images.forEach(image => {
 
       imagesHTML += `
+
         <img
           src="${image}"
           alt="${product.name}"
           onerror="this.style.display='none'"
         >
+
       `;
 
     });
+
 
 
     let priceHTML = "";
@@ -933,6 +1354,7 @@ function renderProducts(category = "all") {
     if (product.sale !== null) {
 
       priceHTML = `
+
         <div class="price">
 
           <span class="old-price">
@@ -944,17 +1366,23 @@ function renderProducts(category = "all") {
           </span>
 
         </div>
-      `;
 
-    } else {
-
-      priceHTML = `
-        <div class="price">
-          ${product.price}$
-        </div>
       `;
 
     }
+
+    else {
+
+      priceHTML = `
+
+        <div class="price">
+          ${product.price}$
+        </div>
+
+      `;
+
+    }
+
 
 
     let availabilityHTML = "";
@@ -968,6 +1396,7 @@ function renderProducts(category = "all") {
           🟢 متوفر
         </div>
 
+
         <div class="quantity">
 
           <button
@@ -976,9 +1405,11 @@ function renderProducts(category = "all") {
             −
           </button>
 
+
           <span id="qty${index}">
             ${product.quantity}
           </span>
+
 
           <button
             onclick="changeQuantity(${index}, 1)"
@@ -990,17 +1421,20 @@ function renderProducts(category = "all") {
 
       `;
 
-    } else {
+    }
+
+    else {
 
       availabilityHTML = `
 
         <div class="unavailable">
-          🔴 غير متوفر حاليًا — الكمية محدودة
+          🔴 غير متوفر حاليًا
         </div>
 
       `;
 
     }
+
 
 
     container.innerHTML += `
@@ -1011,21 +1445,30 @@ function renderProducts(category = "all") {
           ${imagesHTML}
         </div>
 
+
         <h2>
           ${product.name}
         </h2>
 
+
         ${
           product.description
+
           ? `
+
             <p class="description">
               ${product.description}
             </p>
+
           `
+
           : ""
+
         }
 
+
         ${priceHTML}
+
 
         ${availabilityHTML}
 
@@ -1036,6 +1479,7 @@ function renderProducts(category = "all") {
   });
 
 }
+
 
 
 /* =====================================================
@@ -1049,7 +1493,9 @@ function changeQuantity(index, amount) {
 
 
   if (!product.available) {
+
     return;
+
   }
 
 
@@ -1057,7 +1503,9 @@ function changeQuantity(index, amount) {
 
 
   if (product.quantity < 0) {
+
     product.quantity = 0;
+
   }
 
 
@@ -1076,7 +1524,9 @@ function changeQuantity(index, amount) {
 
 
   updateTotal();
+
 }
+
 
 
 /* =====================================================
@@ -1091,17 +1541,24 @@ function updateTotal() {
   products.forEach(product => {
 
     if (
+
       product.available &&
+
       product.quantity > 0
+
     ) {
 
       const price =
+
         product.sale !== null
-        ? product.sale
-        : product.price;
+
+          ? product.sale
+
+          : product.price;
 
 
       productsTotal +=
+
         price * product.quantity;
 
     }
@@ -1110,8 +1567,11 @@ function updateTotal() {
 
 
   const delivery =
+
     Number(
+
       document.getElementById("area").value
+
     );
 
 
@@ -1128,8 +1588,55 @@ function updateTotal() {
 
   document.getElementById("total")
     .textContent =
+
     total.toFixed(2);
+
 }
+
+
+
+/* =====================================================
+   السؤال عن سعر فكرة الهدية
+===================================================== */
+
+function askGiftPrice(number) {
+
+  const phone =
+    "96176365219";
+
+
+  const message =
+
+    "🎁 مرحباً G&D Elegance\n\n" +
+
+    "أريد معرفة سعر فكرة الهدية رقم " +
+
+    number +
+
+    " 🎁";
+
+
+  const whatsappURL =
+
+    "https://wa.me/" +
+
+    phone +
+
+    "?text=" +
+
+    encodeURIComponent(message);
+
+
+  window.open(
+
+    whatsappURL,
+
+    "_blank"
+
+  );
+
+}
+
 
 
 /* =====================================================
@@ -1139,10 +1646,12 @@ function updateTotal() {
 function sendOrder() {
 
   let message =
+
     "🛍️ طلب جديد من G&D Elegance\n\n";
 
 
   let hasOrder = false;
+
 
   let productsTotal = 0;
 
@@ -1150,20 +1659,27 @@ function sendOrder() {
   products.forEach(product => {
 
     if (
+
       product.available &&
+
       product.quantity > 0
+
     ) {
 
       hasOrder = true;
 
 
       const price =
+
         product.sale !== null
-        ? product.sale
-        : product.price;
+
+          ? product.sale
+
+          : product.price;
 
 
       const subtotal =
+
         price * product.quantity;
 
 
@@ -1172,17 +1688,25 @@ function sendOrder() {
 
 
       message +=
+
         "• " +
+
         product.name +
+
         " × " +
+
         product.quantity +
+
         " = " +
+
         subtotal.toFixed(2) +
+
         "$\n";
 
     }
 
   });
+
 
 
   if (!hasOrder) {
@@ -1192,7 +1716,9 @@ function sendOrder() {
     );
 
     return;
+
   }
+
 
 
   const area =
@@ -1209,11 +1735,17 @@ function sendOrder() {
     ].text;
 
 
+
   const address =
+
     document
+
       .getElementById("address")
+
       .value
+
       .trim();
+
 
 
   if (!address) {
@@ -1222,67 +1754,98 @@ function sendOrder() {
       "يرجى كتابة عنوان التوصيل بالتفصيل"
     );
 
+
     document
+
       .getElementById("address")
+
       .focus();
 
+
     return;
+
   }
+
 
 
   const total =
     productsTotal + delivery;
 
 
+
   message +=
+
     "\n💵 مجموع المنتجات: " +
+
     productsTotal.toFixed(2) +
+
     "$";
 
 
+
   message +=
+
     "\n🚚 الدليفري: " +
+
     delivery.toFixed(2) +
+
     "$";
 
 
+
   message +=
+
     "\n📍 القضاء: " +
+
     areaName;
 
 
+
   message +=
+
     "\n🏠 العنوان بالتفصيل: " +
+
     address;
 
 
+
   message +=
+
     "\n\n💰 المجموع النهائي: " +
+
     total.toFixed(2) +
+
     "$";
 
 
-  /*
-    رقم واتساب استقبال الطلبات
-    غيّره إذا كان لديك رقم آخر
-  */
 
   const phone =
     "96176365219";
 
 
+
   const whatsappURL =
+
     "https://wa.me/" +
+
     phone +
+
     "?text=" +
+
     encodeURIComponent(message);
 
 
+
   window.open(
+
     whatsappURL,
+
     "_blank"
+
   );
+
 }
+
 
 
 /* =====================================================
@@ -1292,6 +1855,7 @@ function sendOrder() {
 renderProducts("all");
 
 updateTotal();
+
 
 </script>
 
